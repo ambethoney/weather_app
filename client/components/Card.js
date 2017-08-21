@@ -4,9 +4,9 @@ import { Link } from 'react-router';
 const Card = React.createClass({
 
   render() {
-    const {post, i } = this.props;
+    const {location, i } = this.props;
     return (
-      <Link to={`/view/${post}`}>
+      <Link to={`/view/${location}`}>
         <figure className="card">
           <p>hello</p>
         </figure>

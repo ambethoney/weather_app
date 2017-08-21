@@ -1,13 +1,44 @@
-/**
-  Action Creators
 
-  These fire events which the reducer will handle
-  We will later call these functions from inside our component
+export const GET_INPUT_VALUE = 'GET_INPUT_VALUE'
+export const CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS'
+export const REQUEST_LOCATION = 'REQUEST_LOCATION'
+export const RECEIVE_LOCATION = 'RECEIVE_LOCATION'
+export const SELECT_LOCATION =  'SELECT_LOCATION'
 
-  Later these functions get bound to 'dispatch' fires the actual event
-  Right now they just return an object
+//RECEIVE SEARCHBAR DATA
 
-  It's a code convention to use all capitals and snake case for the event names
-  We use const to store the name of the event so it is immutable
+export const getInput = input =>({
+  type: GET_INPUT_VALUE,
+  input
+})
 
-*/
+export const clearSuggestions = input => ({
+  type:CLEAR_SUGGESTIONS
+})
+
+
+
+//FETCH LOCATION DATA
+
+export const requestLocation = locations =>({
+    type: REQUEST_LOCATION,
+    locations
+})
+
+export const receiveLocation = (locations, json) => ({
+    type: RECEIVE_LOCATION,
+    locations,
+    card: json.data.children.map( child => child.data )
+})
+
+export const selectLocation = locations => ({
+    type: SELECT_LOCATION,
+    locations
+})
+
+export const fetchLocation = locations => dispatch => {
+  dispatch(requestLocation(locations))
+  return fetch(`http://api.wunderground.com/api/${MY_KEY}/conditions/q/${locations}.json`)
+  .then(response => response.json())
+  .then(json=>dispatch(receiveLocation(locations, json)))
+}

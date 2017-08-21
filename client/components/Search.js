@@ -3,11 +3,18 @@ import Geosuggest from 'react-geosuggest';
 
 const Search = React.createClass({
 
+  onSuggestSelect(suggest){
+    const location = suggest;
+    this.props.selectLocation(location);
+  },
+
   render() {
-    const {post, i } = this.props;
     return (
       <div className="search-bar">
-        <Geosuggest />
+        <Geosuggest
+          placeholder="Check New Location"
+          onSuggestSelect={this.onSuggestSelect}
+        />
       </div>
     );
   }
