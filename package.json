@@ -35,6 +35,7 @@
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-geosuggest": "^2.5.0",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "react-router-redux": "^4.0.0",
@@ -57,28 +58,52 @@
     "react-addons-test-utils": "^0.14.7"
   },
   "babel": {
-    "presets": ["react", "es2015"],
+    "presets": [
+      "react",
+      "es2015"
+    ],
     "env": {
       "development": {
         "plugins": [
-          ["transform-object-rest-spread"],
-          ["transform-react-display-name"],
-          ["react-transform", {
-            "transforms": [{
-              "transform": "react-transform-hmr",
-              "imports": ["react"],
-              "locals": ["module"]
-            }, {
-              "transform": "react-transform-catch-errors",
-              "imports": ["react", "redbox-react"]
-            }]
-          }]
+          [
+            "transform-object-rest-spread"
+          ],
+          [
+            "transform-react-display-name"
+          ],
+          [
+            "react-transform",
+            {
+              "transforms": [
+                {
+                  "transform": "react-transform-hmr",
+                  "imports": [
+                    "react"
+                  ],
+                  "locals": [
+                    "module"
+                  ]
+                },
+                {
+                  "transform": "react-transform-catch-errors",
+                  "imports": [
+                    "react",
+                    "redbox-react"
+                  ]
+                }
+              ]
+            }
+          ]
         ]
       },
       "production": {
         "plugins": [
-          ["transform-object-rest-spread"],
-          ["transform-react-display-name"]
+          [
+            "transform-object-rest-spread"
+          ],
+          [
+            "transform-react-display-name"
+          ]
         ]
       }
     }
@@ -94,8 +119,14 @@
     },
     "parser": "babel-eslint",
     "rules": {
-      "quotes": [2, "single"],
-      "strict": [2, "never"],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "strict": [
+        2,
+        "never"
+      ],
       "babel/generator-star-spacing": 1,
       "babel/new-cap": 1,
       "babel/object-shorthand": 1,

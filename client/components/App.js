@@ -1,6 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actionCreators from '../actions/actionCreators';
+//import * as actionCreators from '../actions/actionCreators';
 
 /*
   Components
@@ -32,7 +32,6 @@ import Main from './Main';
 
 function mapStateToProps(state) {
   return {
-
   };
 }
 

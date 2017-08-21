@@ -12,9 +12,7 @@ import rootReducer from './reducers/index';
   2. An optional starting state - similar to React's getInitialState
 */
 
-const defaultState = {
-
-};
+const defaultState = {};
 
 const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
