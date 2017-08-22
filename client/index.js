@@ -1,6 +1,5 @@
 //TODO
-//implement search bar
-//API
+//get data into store
 //normalize data
 //local storage
 //styles
@@ -11,13 +10,14 @@
 */
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Provider} from 'react-redux';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import 'babel-polyfill';
 
 /*
   Import Components
 */
+
 // import App from './components/App';
 import App from './components/App';
 import Dashboard from './components/Dashboard';

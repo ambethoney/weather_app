@@ -1,44 +1,46 @@
+import fetch from 'isomorphic-fetch';
 
-export const GET_INPUT_VALUE = 'GET_INPUT_VALUE'
+export const SELECT_LOCATION = 'SELECT_LOCATION'
 export const CLEAR_SUGGESTIONS = 'CLEAR_SUGGESTIONS'
-export const REQUEST_LOCATION = 'REQUEST_LOCATION'
-export const RECEIVE_LOCATION = 'RECEIVE_LOCATION'
-export const SELECT_LOCATION =  'SELECT_LOCATION'
+export const FETCHING_LOCATION = 'FETCHING_LOCATION'
+export const RECEIVE_LOCATION =  'DISPLAY_LOCATION'
+export const ERROR_FETCHING = 'ERROR_FETCHING'
+
+
 
 //RECEIVE SEARCHBAR DATA
 
-export const getInput = input =>({
-  type: GET_INPUT_VALUE,
-  input
+export const getInput = (locationCity, locationState) =>({
+  type: SELECT_LOCATION,
+  locationCity,
+  locationState
 })
 
-export const clearSuggestions = input => ({
-  type:CLEAR_SUGGESTIONS
-})
+// export const clearSuggestions = input => ({
+//   type:CLEAR_SUGGESTIONS
+// })
 
 
 
 //FETCH LOCATION DATA
 
-export const requestLocation = locations =>({
-    type: REQUEST_LOCATION,
-    locations
+export const fetchingLocation =  (locationCity, locationState) =>({
+  type: FETCHING_LOCATION,
+  location
 })
 
 export const receiveLocation = (locations, json) => ({
     type: RECEIVE_LOCATION,
     locations,
-    card: json.data.children.map( child => child.data )
+    card: json
 })
 
-export const selectLocation = locations => ({
-    type: SELECT_LOCATION,
-    locations
-})
-
-export const fetchLocation = locations => dispatch => {
-  dispatch(requestLocation(locations))
-  return fetch(`http://api.wunderground.com/api/${MY_KEY}/conditions/q/${locations}.json`)
-  .then(response => response.json())
-  .then(json=>dispatch(receiveLocation(locations, json)))
+export const fetchLocation = (locationCity, locationState, location) => dispatch => {
+  dispatch(fetchingLocation(locationCity, locationState))
+  return fetch(`http://api.wunderground.com/api/9591ee1195472466/conditions/q/${locationCity}/${locationState}.json`)
+  .then(
+    response => console.log(response),
+    error => console.log(error)
+  )
+  .then(json=>dispatch(receiveLocation(location, json)))
 }

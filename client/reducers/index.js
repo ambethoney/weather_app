@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import { REQUEST_LOCATION, RECEIVE_LOCATION, SELECT_LOCATION } from '../actions/actionCreators'
+import { SELECT_LOCATION, CLEAR_SUGGESTIONS, FETCHING_LOCATION, RECEIVE_LOCATION, ERROR_FETCHING } from '../actions/actionCreators'
 
 /*
   Reducers
@@ -18,30 +18,50 @@ const locations = (state = [], action) => {
   return state
 }
 
-const addNewLocation = (state = {
-  isFetching: false,
-  items: []
-}, action) => {
+const isFetching = (state = []) => {
+  return state
+}
+
+const fetchLocation = (state = [], action) =>{
+    switch(action.type){
+      case SELECT_LOCATION:
+        return [
+          ...state,{
+            locationCity: action.city,
+            locationState: action.state
+          }
+        ]
+        case FETCHING_LOCATION:
+          return [
+            ...state, {
+              isFetching: true
+            }
+          ]
+        case RECEIVE_LOCATION:
+          return[
+            ...state, {
+              isFetching: false,
+              locations: [action]
+            }
+          ]
+      default:
+        return state
+    }
+}
+
+const addNewLocation = (state = [], action) => {
   switch (action.type){
-    case SELECT_LOCATION:
-      return action.location
-    case REQUEST_LOCATION:
-      return{
-        ...state,
-        isFetching: true
-      }
+    case FETCHING_LOCATION:
     case RECEIVE_LOCATION:
-      return{
-        ...state,
-        isFetching: false,
-        items: action.location
-      }
+      return [
+        ...state,{
+        locations: fetchLocation(state[action.locations], action)
+        }
+      ]
     default:
       return state
   }
 }
-
-
 
 
 const rootReducer = combineReducers({addNewLocation, locations, routing: routerReducer})

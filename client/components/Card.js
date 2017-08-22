@@ -8,7 +8,7 @@ const Card = React.createClass({
     return (
       <Link to={`/view/${location}`}>
         <figure className="card">
-          <p>hello</p>
+          {location}
         </figure>
       </Link>
     );
