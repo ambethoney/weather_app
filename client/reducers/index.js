@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
-import { SELECT_LOCATION, CLEAR_SUGGESTIONS, FETCHING_LOCATION, RECEIVE_LOCATION, ERROR_FETCHING } from '../actions/actionCreators'
+import { SELECT_LOCATION, CLEAR_SUGGESTIONS, FETCHING_LOCATION, ADD_LOCATION, ERROR_FETCHING } from '../actions/actionCreators'
 
 /*
   Reducers
@@ -13,56 +13,41 @@ import { SELECT_LOCATION, CLEAR_SUGGESTIONS, FETCHING_LOCATION, RECEIVE_LOCATION
 */
 import location from '../sample.js';
 
-
-const locations = (state = [], action) => {
-  return state
-}
-
-const isFetching = (state = []) => {
-  return state
-}
-
-const fetchLocation = (state = [], action) =>{
-    switch(action.type){
-      case SELECT_LOCATION:
-        return [
-          ...state,{
+function locations(
+  state = {
+    isFetching: false,
+    location:[]
+  }, action){
+  switch(action.type){
+    case SELECT_LOCATION:
+      return [
+        ...state
+      ]
+      case ADD_LOCATION:
+        return[
+          ...state, {
+            isFetching: false,
+            locationId: action.id,
             locationCity: action.city,
             locationState: action.state
           }
         ]
-        case FETCHING_LOCATION:
-          return [
-            ...state, {
-              isFetching: true
-            }
-          ]
-        case RECEIVE_LOCATION:
-          return[
-            ...state, {
-              isFetching: false,
-              locations: [action]
-            }
-          ]
-      default:
-        return state
-    }
-}
-
-const addNewLocation = (state = [], action) => {
-  switch (action.type){
-    case FETCHING_LOCATION:
-    case RECEIVE_LOCATION:
-      return [
-        ...state,{
-        locations: fetchLocation(state[action.locations], action)
-        }
-      ]
     default:
       return state
   }
 }
 
+const addNewLocation = (state = [], action) =>{
+  switch(action.type){
+    case FETCHING_LOCATION:
+    case ADD_LOCATION:
+      return{
+        ...state,
+        [action.locationId]:locations(state[action.locationId], action)
+      }
+  }
+  return state
+}
 
 const rootReducer = combineReducers({addNewLocation, locations, routing: routerReducer})
 

@@ -5,6 +5,7 @@ const Search = React.createClass({
 
   onSuggestSelect(suggest){
     const location = suggest;
+    const {locationId} = this.props.params;
     const locationCity= suggest.label.split(", ")[0];
     const locationState= suggest.label.split(", ")[1];
 

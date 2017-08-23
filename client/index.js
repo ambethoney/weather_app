@@ -1,5 +1,4 @@
 //TODO
-//get data into store
 //normalize data
 //local storage
 //styles
