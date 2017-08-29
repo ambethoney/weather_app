@@ -1,5 +1,5 @@
 //TODO
-//normalize data
+
 //local storage
 //styles
 
@@ -33,7 +33,7 @@ const router = (
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={Dashboard} />
-        <Route path="/view/:postId" component={Single}></Route>
+        <Route path="/view/:cityId" component={Single}></Route>
       </Route>
     </Router>
   </Provider>

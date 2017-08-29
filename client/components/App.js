@@ -5,8 +5,8 @@ import Main from './Main';
 
 const mapStateToProps = state => {
   return{
-    card: state.locations,
-    searchBar : state.searchLocation
+    card: state.addNewCity,
+    searchBar : state.fetchCity
   }
 }
 

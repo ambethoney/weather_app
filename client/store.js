@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router'
-import { createLogger } from 'redux-logger'
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers/index';
+// import { createLogger } from 'redux-logger'
 
 
 /*
@@ -14,22 +14,19 @@ import rootReducer from './reducers/index';
   2. An optional starting state - similar to React's getInitialState
 */
 
-import location from './sample.js';
-const defaultState = {
-  locations: location
-};
 
 const enhancers = compose(
   applyMiddleware(thunkMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
-const logger = createLogger();
 
-const store = createStore(rootReducer,
-  defaultState,
-  enhancers,
-);
+const store = createStore(rootReducer, persistedState, enhancers);
+store.subscribe(()=>{
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
+
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
