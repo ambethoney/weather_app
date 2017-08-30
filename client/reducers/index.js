@@ -33,22 +33,13 @@ const addNewCity = (state = [], action) =>{
     case ADD_CITY:
       return[
         ...state,{
-          id: action.index,
-          city:action.payload.current_observation.display_location.city,
-          state: action.payload.current_observation.display_location.state_name,
-          stateAbbrev: action.payload.current_observation.display_location.state,
-          zip: action.payload.current_observation.display_location.zip,
-          country: action.payload.current_observation.display_location.country,
-          feelsLike: action.payload.current_observation.feelslike_f,
-          tempC: action.payload.current_observation.temp_c,
-          tempF: action.payload.current_observation.temp_f,
-          feelsLikeString: action.payload.current_observation.feelslike_string,
-          icon: action.payload.current_observation.icon_url,
-          weather: action.payload.current_observation.weather,
-          lastObservation: action.payload.current_observation.observation_time,
-          humidity: action.payload.current_observation.relative_humidity,
-          wind: action.payload.current_observation.wind_string,
-          windChill: action.payload.current_observation.windchill_f
+          city:action.cityName,
+          currentIcon: action.payload.currently.icon,
+          currentTemp: action.payload.currently.temperature,
+          currentSummary: action.payload.currently.summary,
+          dailySummary: action.payload.daily.summary,
+          dailyIcon: action.payload.daily.icon,
+          dailyForecast: action.payload.daily.data
         }
       ]
     default:

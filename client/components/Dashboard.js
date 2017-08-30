@@ -13,7 +13,7 @@ const Dashboard = React.createClass({
         <div className="search-bar">
           <Search  {...this.props}/>
         </div>
-        <div className="weather-card-grid">
+        <div className="dashboard-grid">
           {this.props.card.map((city, i) => <Card {...this.props} key={i} id={i} city={city} />)}
         </div>
       </div>

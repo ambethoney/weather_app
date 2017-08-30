@@ -23,21 +23,23 @@ export const fetchingCity = () =>({
   type: FETCHING_CITY
 })
 
-export const addCity = (payload) => ({
+export const addCity = (payload, cityName) => ({
     type: ADD_CITY,
-    payload
+    payload,
+    cityName
 })
 
 
-export const fetchCity = (cityLat, cityLng) => {
-  const URL = `http://api.wunderground.com/api/9591ee1195472466/conditions/q/${cityLat},${cityLng}.json`;
+export const fetchCity = (cityLat, cityLng, cityName) => {
+  const URL = `https://api.darksky.net/forecast/08d6adb1c407092ec8396774780062ac/${cityLat},${cityLng}?${cityName}`;
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
 	return (dispatch) => {
   	dispatch(fetchingCity());
-    return fetch(URL, { method: 'GET'})
+    return fetch(proxyurl + URL)
       .then( response => Promise.all([response, response.json()]))
       .then(([response, json]) =>{
     	if(response.status === 200){
-      	dispatch(addCity(json))
+      	dispatch(addCity(json, cityName))
       }
       else{
       	console.log(err)

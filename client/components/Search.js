@@ -7,9 +7,10 @@ const Search = React.createClass({
     const city = suggest;
     const cityLat= city.location.lat;
     const cityLng= city.location.lng;
-    
+    const cityName = city.gmaps.address_components[0].long_name
+
     this.props.getInput(cityLat, cityLng);
-    this.props.fetchCity(cityLat, cityLng, city);
+    this.props.fetchCity(cityLat, cityLng, cityName);
     this._geoSuggest.clear();
   },
 
@@ -19,13 +20,12 @@ const Search = React.createClass({
       <div className="search-bar">
         <Geosuggest
           ref={el=>this._geoSuggest=el}
-          placeholder="Check New Location"
+          placeholder="Enter a location"
           onSuggestSelect={this.onSuggestSelect}
         />
       </div>
     );
   }
-
 });
 
 export default Search;

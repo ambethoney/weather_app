@@ -22,11 +22,11 @@ const enhancers = compose(
 
 
 const store = createStore(rootReducer, persistedState, enhancers);
+
 store.subscribe(()=>{
   localStorage.setItem('reduxState', JSON.stringify(store.getState()))
 })
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-
 
 export const history = syncHistoryWithStore(browserHistory, store);
 
