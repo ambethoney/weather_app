@@ -1,9 +1,3 @@
-//TODO
-
-//local storage
-//styles
-
-
 /*
   Import Dependencies
 */

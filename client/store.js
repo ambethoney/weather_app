@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router'
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers/index';
-// import { createLogger } from 'redux-logger'
+import { loadState, saveState } from './localStorage';
 
 
 /*
@@ -20,14 +20,13 @@ const enhancers = compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f
 );
 
+const persistedState = loadState();
 
 const store = createStore(rootReducer, persistedState, enhancers);
 
 store.subscribe(()=>{
-  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+  saveState(store.getState());
 })
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {}
-
 export const history = syncHistoryWithStore(browserHistory, store);
 
 /*
